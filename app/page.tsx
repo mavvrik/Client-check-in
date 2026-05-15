@@ -12,10 +12,10 @@ export default function DonorQueueApp() {
     downloadingApp: "No",
   });
 
-  const [queue, setQueue] = useState([]);
-  const [calledDonors, setCalledDonors] = useState([]);
-  const [staffNotifications, setStaffNotifications] = useState([]);
-  const [emailNotifications, setEmailNotifications] = useState([]);
+  const [queue, setQueue] = useState<any[]>([]);
+  const [calledDonors, setCalledDonors] = useState<any[]>([]);
+  const [staffNotifications, setStaffNotifications] = useState<any[]>([]);
+  const [emailNotifications, setEmailNotifications] = useState<any[]>([]);
   const [language, setLanguage] = useState("EN");
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [adminMode, setAdminMode] = useState(false);
@@ -72,22 +72,24 @@ export default function DonorQueueApp() {
   };
 
   const getWaitMinutes = (time: string) => {
-    return Math.floor((new Date() - new Date(time)) / 60000);
+    return Math.floor(
+  (new Date().getTime() - new Date(time).getTime()) / 60000
+);
   };
 
-  const getWaitTime = (time) => {
-    const diffMs = new Date() - new Date(time);
+  const getWaitTime = (time: string) => {
+    const diffMs = new Date().getTime() - new Date(time).getTime();
     const minutes = Math.floor(diffMs / 60000);
     const seconds = Math.floor((diffMs % 60000) / 1000);
 
     return `${minutes}m ${seconds}s`;
   };
 
-  const isWaitingTooLong = (time) => {
+  const isWaitingTooLong = (time: string) => {
     return getWaitMinutes(time) >= 5;
   };
 
-  const getExperienceScore = (time) => {
+  const getExperienceScore = (time: string) => {
     const minutes = getWaitMinutes(time);
 
     if (minutes <= 4) return 100;
@@ -97,7 +99,7 @@ export default function DonorQueueApp() {
     return Math.max(score, 10);
   };
 
-  const getExperienceColor = (score) => {
+  const getExperienceColor = (score: number) => {
     if (score >= 80) return "bg-green-500";
     if (score >= 60) return "bg-yellow-500";
     if (score >= 40) return "bg-orange-500";
@@ -174,7 +176,7 @@ export default function DonorQueueApp() {
     });
   };
 
-  const markAsSeen = (id) => {
+  const markAsSeen = (id: number) => {
     const donor = queue.find((d) => d.id === id);
 
     if (!donor) return;
@@ -198,7 +200,7 @@ export default function DonorQueueApp() {
     setQueue((prev) => prev.filter((d) => d.id !== id));
   };
 
-  const removeDonor = (id) => {
+  const removeDonor = (id: number) => {
     setQueue((prev) => prev.filter((d) => d.id !== id));
   };
 
