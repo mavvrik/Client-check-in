@@ -117,7 +117,9 @@ export default function DonorQueueApp() {
     );
   }, [queue]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (
+  e: React.FormEvent<HTMLFormElement>
+) => {
     e.preventDefault();
 
     const donor = {
@@ -370,7 +372,9 @@ export default function DonorQueueApp() {
                 type="password"
                 placeholder="Enter Admin Password"
                 value={adminPassword}
-                onChange={(e) => setAdminPassword(e.target.value)}
+                onChange={(
+  e: React.ChangeEvent<HTMLInputElement>
+) => setAdminPassword(e.target.value)}
                 className="border rounded-xl p-3 w-full"
               />
 
