@@ -62,7 +62,9 @@ export default function DonorQueueApp() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
