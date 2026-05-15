@@ -71,7 +71,7 @@ export default function DonorQueueApp() {
     });
   };
 
-  const getWaitMinutes = (time) => {
+  const getWaitMinutes = (time: string) => {
     return Math.floor((new Date() - new Date(time)) / 60000);
   };
 
